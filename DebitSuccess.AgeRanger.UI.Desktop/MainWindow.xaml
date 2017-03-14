@@ -1,0 +1,90 @@
+﻿<Window x:Class="DebitSuccess.AgeRanger.UI.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xcd="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:DebitSuccess.AgeRanger.UI.Desktop"
+        mc:Ignorable="d"
+        Title="Age Ranger" Height="500" Width="800" WindowState="Maximized">
+
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+
+    <Window.Resources>
+
+        <SolidColorBrush x:Key="PaleBack" Color="#50D0D0D0" />
+        <SolidColorBrush x:Key="PaleBorder" Color="#20000000" />
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="4,2" />
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- Title -->
+            <RowDefinition Height="Auto" />
+            <!-- Search bar -->
+            <RowDefinition Height="Auto" />
+            <!-- Data grid and Selected Person editor-->
+            <RowDefinition Height="2*" />
+            <!-- Splitter -->
+            <RowDefinition Height="6" />
+            <!-- Log viewer -->
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <Grid Grid.Row="0">
+            <TextBlock Text="Age Rangers" FontSize="48" HorizontalAlignment="Center" Margin="0,16" />
+        </Grid>
+
+        <Border Grid.Row="1" Background="{StaticResource PaleBack}" BorderThickness="0,1" BorderBrush="{StaticResource PaleBorder}" Padding="4">
+          
+            <WrapPanel Orientation="Horizontal">
+                <Label>First Name</Label>
+                <TextBox Text="{Binding Path=SearchFilter.FirstName}" Width="100" />
+                <Label>Last Name</Label>
+                <TextBox Text="{Binding Path=SearchFilter.LastName}" Width="100" />
+                <Label>Min. Age</Label>
+                <xcd:IntegerUpDown Text="{Binding Path=SearchFilter.MinAge}" Width="100" Margin="4,2" Minimum="0" ClipValueToMinMax="True" DisplayDefaultValueOnEmptyText="True" DefaultValue="0" />
+                <Label>Max. Age</Label>
+                <xcd:IntegerUpDown Text="{Binding Path=SearchFilter.MaxAge}" Width="100" Margin="4,2" ClipValueToMinMax="True" Minimum="0" DisplayDefaultValueOnEmptyText="True" DefaultValue="200" />
+                <Button Margin="4,2" Padding="4,0" Command="{Binding Path=SearchCommand}">Search</Button>
+            </WrapPanel>
+
+        </Border>
+
+        <Grid Grid.Row="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <DataGrid Grid.Row="0" ItemsSource="{Binding Path=People}" SelectedItem="{Binding Path=SelectedPerson}" Margin="4"
+                  AutoGenerateColumns="False" HorizontalGridLinesBrush="{StaticResource PaleBack}" VerticalGridLinesBrush="{StaticResource PaleBack}" 
+                  HeadersVisibility="Column" Background="White">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}" IsReadOnly="True" Width="*" />
+                    <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}" IsReadOnly="True" Width="*" />
+                    <DataGridTextColumn Header="Age" Binding="{Binding Path=Age}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Age Group" Binding="{Binding Path=AgeRange}" IsReadOnly="True" />
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+            <local:PersonEditor Grid.Row="1" />
+        </Grid>
+        
+        <GridSplitter Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+
+        <Border Grid.Row="4" Background="{StaticResource PaleBack}" BorderThickness="0,1,0,0" BorderBrush="{StaticResource PaleBorder}">
+            <ListBox Margin="4" BorderThickness="0" ItemsSource="{Binding Path=LogItems}" Background="Transparent" />
+        </Border>
+
+    </Grid>
+</Window>
