@@ -1,0 +1,100 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26206.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitSuccess.AgeRanger.Api", "DebitSuccess.AgeRanger.Api\DebitSuccess.AgeRanger.Api.csproj", "{8C092B66-C1F9-4935-90D1-5E0C2F01C75A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitSuccess.AgeRanger.Data.SQLite", "DebitSuccess.AgeRanger.Data.SQLite\DebitSuccess.AgeRanger.Data.SQLite.csproj", "{E80E408B-955C-4946-AA20-CB7F7A1F1C58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitSuccess.AgeRanger.Data.SQLServer", "DebitSuccess.AgeRanger.Data.SQLServer\DebitSuccess.AgeRanger.Data.SQLServer.csproj", "{5F802583-93BA-40B9-88F6-929F25FA4806}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitSuccess.AgeRanger.Logging", "DebitSuccess.AgeRanger.Logging\DebitSuccess.AgeRanger.Logging.csproj", "{B364FAD9-BA11-4A3A-91A1-9EC20E8526EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitSuccess.AgeRanger.UI.Browser", "DebitSuccess.AgeRanger.UI.Browser\DebitSuccess.AgeRanger.UI.Browser.csproj", "{FC660FC6-04D8-48D6-B5E8-C3CAFF7E7180}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitSuccess.AgeRanger.UI.Desktop", "DebitSuccess.AgeRanger.UI.Desktop\DebitSuccess.AgeRanger.UI.Desktop.csproj", "{ECA5302E-3483-48B4-A070-DF9E7A7EDE5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitSuccess.AgeRanger.UnitTests", "DebitSuccess.AgeRanger.UnitTests\DebitSuccess.AgeRanger.UnitTests.csproj", "{B2846AF0-6496-439D-98FA-DB214E1F4E7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitSuccess.AgeRanger.WebApi", "DebitSuccess.AgeRanger.WebApi\DebitSuccess.AgeRanger.WebApi.csproj", "{7821790D-B344-47D5-9238-8170A4E03D95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E015FE0C-3C7A-485F-B9B8-791CA07421D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User Interfaces", "User Interfaces", "{825E2C31-4EE5-4F2A-9E99-2AC3FF7BC88E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Providers", "Data Providers", "{C580ACF4-F7A9-4FF4-B91E-B16109058F12}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{2ADA05C3-4C62-44AE-B15A-D45C1C41C0B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{4CC55748-50FC-47F8-A87E-8BFAB24D25DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{06C45F38-2486-43EB-AB38-3F19F345282B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitSuccess.AgeRanger.WebApi.IntegrationTests", "DebitSuccess.AgeRanger.WebApi.IntegrationTests\DebitSuccess.AgeRanger.WebApi.IntegrationTests.csproj", "{29509EC5-2345-4D33-ABA1-951994CFE684}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitSuccess.AgeRanger.Data.SQLite.IntegrationTests", "DebitSuccess.AgeRanger.Data.SQLite.IntegrationTests\DebitSuccess.AgeRanger.Data.SQLite.IntegrationTests.csproj", "{B8359534-E9AD-4126-BF5F-982CB1F16DFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C092B66-C1F9-4935-90D1-5E0C2F01C75A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C092B66-C1F9-4935-90D1-5E0C2F01C75A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C092B66-C1F9-4935-90D1-5E0C2F01C75A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C092B66-C1F9-4935-90D1-5E0C2F01C75A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E80E408B-955C-4946-AA20-CB7F7A1F1C58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E80E408B-955C-4946-AA20-CB7F7A1F1C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E80E408B-955C-4946-AA20-CB7F7A1F1C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E80E408B-955C-4946-AA20-CB7F7A1F1C58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F802583-93BA-40B9-88F6-929F25FA4806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F802583-93BA-40B9-88F6-929F25FA4806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F802583-93BA-40B9-88F6-929F25FA4806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F802583-93BA-40B9-88F6-929F25FA4806}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B364FAD9-BA11-4A3A-91A1-9EC20E8526EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B364FAD9-BA11-4A3A-91A1-9EC20E8526EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B364FAD9-BA11-4A3A-91A1-9EC20E8526EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B364FAD9-BA11-4A3A-91A1-9EC20E8526EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC660FC6-04D8-48D6-B5E8-C3CAFF7E7180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC660FC6-04D8-48D6-B5E8-C3CAFF7E7180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC660FC6-04D8-48D6-B5E8-C3CAFF7E7180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC660FC6-04D8-48D6-B5E8-C3CAFF7E7180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECA5302E-3483-48B4-A070-DF9E7A7EDE5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECA5302E-3483-48B4-A070-DF9E7A7EDE5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECA5302E-3483-48B4-A070-DF9E7A7EDE5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECA5302E-3483-48B4-A070-DF9E7A7EDE5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2846AF0-6496-439D-98FA-DB214E1F4E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2846AF0-6496-439D-98FA-DB214E1F4E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2846AF0-6496-439D-98FA-DB214E1F4E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2846AF0-6496-439D-98FA-DB214E1F4E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7821790D-B344-47D5-9238-8170A4E03D95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7821790D-B344-47D5-9238-8170A4E03D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7821790D-B344-47D5-9238-8170A4E03D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7821790D-B344-47D5-9238-8170A4E03D95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29509EC5-2345-4D33-ABA1-951994CFE684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29509EC5-2345-4D33-ABA1-951994CFE684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29509EC5-2345-4D33-ABA1-951994CFE684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29509EC5-2345-4D33-ABA1-951994CFE684}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8359534-E9AD-4126-BF5F-982CB1F16DFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8359534-E9AD-4126-BF5F-982CB1F16DFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8359534-E9AD-4126-BF5F-982CB1F16DFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8359534-E9AD-4126-BF5F-982CB1F16DFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8C092B66-C1F9-4935-90D1-5E0C2F01C75A} = {06C45F38-2486-43EB-AB38-3F19F345282B}
+		{E80E408B-955C-4946-AA20-CB7F7A1F1C58} = {C580ACF4-F7A9-4FF4-B91E-B16109058F12}
+		{5F802583-93BA-40B9-88F6-929F25FA4806} = {C580ACF4-F7A9-4FF4-B91E-B16109058F12}
+		{B364FAD9-BA11-4A3A-91A1-9EC20E8526EC} = {4CC55748-50FC-47F8-A87E-8BFAB24D25DB}
+		{FC660FC6-04D8-48D6-B5E8-C3CAFF7E7180} = {825E2C31-4EE5-4F2A-9E99-2AC3FF7BC88E}
+		{ECA5302E-3483-48B4-A070-DF9E7A7EDE5A} = {825E2C31-4EE5-4F2A-9E99-2AC3FF7BC88E}
+		{B2846AF0-6496-439D-98FA-DB214E1F4E7B} = {E015FE0C-3C7A-485F-B9B8-791CA07421D9}
+		{7821790D-B344-47D5-9238-8170A4E03D95} = {2ADA05C3-4C62-44AE-B15A-D45C1C41C0B3}
+		{29509EC5-2345-4D33-ABA1-951994CFE684} = {E015FE0C-3C7A-485F-B9B8-791CA07421D9}
+		{B8359534-E9AD-4126-BF5F-982CB1F16DFD} = {E015FE0C-3C7A-485F-B9B8-791CA07421D9}
+	EndGlobalSection
+EndGlobal
