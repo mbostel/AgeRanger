@@ -1,0 +1,359 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.1.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <meta charset="utf-8" />
+
+    <title>Age Ranger</title>
+
+</head>
+
+<body>
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>Age Ranger</h2>
+            </div>
+        </div>
+
+       
+        <div class="row">
+            <div class="col-xs-6">
+                <table class="table table-bordered table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Min. Age</th>
+                            <th>Max. Age</th>
+                        </tr>
+                    </thead>
+
+                    <tr>
+                        <td>
+                            <button type="button" id="searchButton" class="btn btn-default" onclick="searchClick();">
+                                <span class="glyphicon glyphicon-search" />
+                            </button>  
+                        </td>
+                        <td><input id="searchFirstName" type="text" /></td>
+                        <td><input id="searchLastName" type="text" /></td>
+                        <td><input id="searchMinAge" type="number" /></td>
+                        <td><input id="searchMaxAge" type="number" /></td>
+
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <table id="peopleTable" class="table table-bordered table-condensed table-striped"> 
+                    <thead>
+                        <tr>
+                            <th>Edit</th>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Age</th>
+                            <th>Age Group</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Selected Person</div>
+                    
+                        <div class="panel-body">                        
+
+                            <div class="form-group">
+                                <label for="editID">ID</label>
+                                <input type="text" id="editID" class="form-control" readonly />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="editFirstName">First Name</label>
+                                <input type="text" id="editFirstName" class="form-control" />
+                            </div>
+                        
+                            <div class="form-group">
+                                <label for="editLastName">Last Name</label>
+                                <input type="text" id="editLastName" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="editAge">Age</label>
+                                <input type="number" id="editAge" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="editAgeRange">Age Group</label>
+                                <input type="text" id="editAgeRange" class="form-control" readonly />
+                            </div>
+
+                        
+                        </div>
+                    <div class="panel-footer">
+                        
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button type="button" id="saveButton" class="btn btn-primary" onclick="saveClick();">Save</button>
+                                <button type="button" id="createButton" class="btn btn-primary" onclick="createClick();">New</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <input type="hidden" id="personid" value="0" />
+
+    <script>
+
+        var peopleApi_URL = 'http://localhost:50043/api/Person';
+
+        var PersonEntity = {
+            ID: 0,
+            FirstName: "",
+            LastName: "",
+            Age: 0,
+            AgeRange: ""
+        };
+
+        // Handle Search/Load click
+        function searchClick() {
+
+            var searchURL = peopleApi_URL;
+            var isFirstTerm = true;
+
+            if ($("#searchFirstName").val().length > 0) {
+                searchURL += getQuerySeparator(isFirstTerm);
+                isFirstTerm = false;
+                searchURL += "FirstName=" + $("#searchFirstName").val();                
+            }
+
+            if ($("#searchLastName").val().length > 0) {
+                searchURL += getQuerySeparator(isFirstTerm);
+                isFirstTerm = false;
+                searchURL += "LastName=" + $("#searchLastName").val();
+            }
+
+            if ($("#searchMinAge").val().length > 0) {
+                searchURL += getQuerySeparator(isFirstTerm);
+                isFirstTerm = false;
+                searchURL += "MinAge=" + $("#searchMinAge").val();
+            }
+
+            if ($("#searchMaxAge").val().length > 0) {
+                searchURL += getQuerySeparator(isFirstTerm);
+                isFirstTerm = false;
+                searchURL += "MaxAge=" + $("#searchMaxAge").val();
+            }
+
+            clearPeopleTable();
+
+            // Call the Age Ranger Web API to get a list of People
+            $.ajax({
+                url: searchURL,
+                type: 'GET',
+                dataType: 'json',
+                success: function (people) {
+                    peopleListSuccess(people);
+                },
+                error: function (request, message, error) {
+                    handleException(request, message, error);
+                }
+            });
+
+        }
+
+        function getQuerySeparator(isFirstTerm) {
+
+            var sep = "&"; 
+
+            if (isFirstTerm) {
+                sep = "?";
+            } 
+
+            return sep;
+
+        }
+
+        function saveClick() {
+
+            // Build Person object from inputs
+            PersonEntity = new Object();
+            PersonEntity.ID = $("#editID").val();
+            PersonEntity.FirstName = $("#editFirstName").val();
+            PersonEntity.LastName =  $("#editLastName").val();
+            PersonEntity.Age = $("#editAge").val();
+            PersonEntity.AgeRange = "";
+
+            personAdd(PersonEntity);
+            
+        }
+
+        function createClick() {
+            formClear();
+        }
+
+        // Load all people on Startup
+        $(document).ready(function () { peopleList(); });
+
+        function peopleList() {
+
+            clearPeopleTable();
+
+            // Call the Age Ranger Web API to get a list of People
+            $.ajax({
+                url: peopleApi_URL,
+                type: 'GET',
+                dataType: 'json',
+                success: function (people) {
+                    peopleListSuccess(people);
+                },
+                error: function (request, message, error) {
+                    handleException(request, message, error);
+                }
+            });
+        }
+
+
+        function clearPeopleTable() {
+            $("#peopleTable tbody").remove();
+        }
+
+        function peopleListSuccess(people) {
+            $.each(people, function (index, person) {
+                personAddRow(person);
+            });
+        }
+
+        function personAddRow(person) {
+            // Make sure we have a table body (it gets removed by clearPeopleTable())
+            if ($("#peopleTable tbody").length == 0) {
+                $("#peopleTable").append("<tbody></tbody>");
+            }
+
+            // Add the row
+            $("#peopleTable tbody").append(personBuildTableRow(person));
+
+        }
+
+        function personBuildTableRow(person) {
+            var ret =
+                "<tr>" +
+                "<td>" +
+                    "<button type='button' "                    +
+                    "onclick='personGet(this);' "               +
+                    "class='btn btn-default' "                  +
+                    "data-id='" + person.ID + "'>"              +
+                    "<span class='glyphicon glyphicon-edit' />" +
+                    "</button>" +
+                "</td >" +
+                "<td>" + person.ID        + "</td>" +
+                "<td>" + person.FirstName + "</td>" +
+                "<td>" + person.LastName  + "</td>" +
+                "<td>" + person.Age       + "</td>" +
+                "<td>" + person.AgeRange  + "</td>" +
+                "</tr>";
+            return ret;
+        }
+
+        function personGet(ctl) {
+            // Get person id from data- attribute
+            var id = $(ctl).data("id");
+
+            // Store product id in hidden field
+            $("#personid").val(id);
+
+            // Call Web API to get a person
+            $.ajax({
+                url: peopleApi_URL + "/" + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (person) {
+                    personToFields(person);
+                },
+                error: function (request, message, error) {
+                    handleException(request, message, error);
+                }
+            });
+            
+        }
+
+        // PUT does double duty - both Create & Update
+        // Could have used POST for the CREATE but since we know the resource location it doesn't matter
+        function personAdd(person) {
+            $.ajax({
+                url: peopleApi_URL,
+                type: 'PUT',
+                contentType: "application/json;charset=utf-8",
+                data: JSON.stringify(person),
+                    success: function (person) {
+                        personAddSuccess(person);
+                    },
+                    error: function (request, message, error) {
+                        handleException(request, message, error);
+                    }
+            });
+        }
+
+        function personAddSuccess(person) {
+            
+            // Clear the edit area
+            formClear();
+            // Repopulate the table
+            peopleList();
+        }
+
+        function formClear() {
+            $("#editID").val(0);
+            $("#editFirstName").val("");
+            $("#editLastName").val("");
+            $("#editAge").val(0);
+            $("#editAgeRange").val("");
+        }
+
+        function personToFields(person) {
+            $("#editID").val(person.ID);
+            $("#editFirstName").val(person.FirstName);
+            $("#editLastName").val(person.LastName);
+            $("#editAge").val(person.Age);
+            $("#editAgeRange").val(person.AgeRange);
+        }
+
+        function handleException(request, message, error) {
+            var msg = "";
+            msg += "Code: " + request.status + "\n";
+            msg += "Text: " + request.statusText + "\n";
+            if (request.responseJSON != null) {
+                msg += "Message" + request.responseJSON.Message + "\n";
+            }
+            alert(msg);
+        }
+
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>
